@@ -4,14 +4,14 @@ using ASPSEC3.Models;
 using BCrypt.Net;
 using Microsoft.AspNetCore.Mvc;
 
-namespace YourAppName.Controllers
+namespace ASPSEC3.Controllers
 {
 	public class HashController : Controller
 	{
 		[HttpGet]
 		public IActionResult Index()
 		{
-			return View();
+			return View(new HashViewModel());
 		}
 
 		[HttpPost]
@@ -57,7 +57,8 @@ namespace YourAppName.Controllers
 			}
 
 			model.HashedValue = hashedValue;
-			return PartialView("_HashResult", model); 
+
+			return View("Index", model);
 		}
 	}
 }
