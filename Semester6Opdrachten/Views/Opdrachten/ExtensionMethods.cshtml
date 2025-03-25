@@ -1,0 +1,19 @@
+﻿@model string
+
+@{
+    ViewData["Title"] = "Extension Methods";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form method="post">
+    <label for="inputWord">Enter a word:</label>
+    <input type="text" id="inputWord" name="inputWord" required />
+    <button type="submit">Check</button>
+</form>
+
+@if (!string.IsNullOrEmpty(Model))
+{
+    <p>The given string is: <strong>@Model</strong></p>
+    <p>Is it a palindrome? <strong>@(ViewBag.IsPalindrome ? "Yes" : "No")</strong></p>
+}
