@@ -17,19 +17,79 @@
     <div class="card shadow-lg p-4">
         <h2 class="text-center">@ViewData["Title"]</h2>
 
-        <form method="post" class="mt-4">
+        <!-- Formulier voor Palindrome Check -->
+        <form method="post" class="mt-4" action="@Url.Action("CheckPalindrome")">
             <div class="mb-3">
-                <label for="inputWord" class="form-label">Enter a word:</label>
+                <label for="inputWord" class="form-label">Enter a word to check for Palindrome:</label>
                 <input type="text" id="inputWord" name="inputWord" class="form-control" required />
             </div>
-            <button type="submit" class="btn btn-primary w-100">Check</button>
+            <button type="submit" class="btn btn-primary w-100">Check Palindrome</button>
         </form>
 
-        @if (!string.IsNullOrEmpty(Model))
+        @if (ViewBag.IsPalindrome != null)
         {
             <div class="alert alert-info mt-4">
-                <p>The given string is: <strong>@Model</strong></p>
                 <p>Is it a palindrome? <strong>@(ViewBag.IsPalindrome ? "Yes" : "No")</strong></p>
+            </div>
+        }
+
+        <!-- Formulier voor Even Check -->
+        <form method="post" class="mt-4" action="@Url.Action("CheckEvenNumber")">
+            <div class="mb-3">
+                <label for="inputNumber" class="form-label">Enter a number to check if it's even:</label>
+                <input type="text" id="inputNumber" name="inputNumber" class="form-control" required />
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Check Even</button>
+        </form>
+
+        @if (ViewBag.IsEven != null)
+        {
+            <div class="alert alert-info mt-4">
+                <p>Is it even? <strong>@(ViewBag.IsEven ? "Yes" : "No")</strong></p>
+            </div>
+        }
+
+        <!-- Formulier voor FirstCharToUpper -->
+        <form method="post" class="mt-4" action="@Url.Action("FirstCharToUpper")">
+            <div class="mb-3">
+                <label for="inputString" class="form-label">Enter a string to capitalize the first letter:</label>
+                <input type="text" id="inputString" name="inputString" class="form-control" required />
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Capitalize First Character</button>
+        </form>
+
+        @if (ViewBag.FirstCharToUpper != null)
+        {
+            <div class="alert alert-info mt-4">
+                <p>String with the first character capitalized: <strong>@ViewBag.FirstCharToUpper</strong></p>
+            </div>
+        }
+
+        <!-- Formulier voor Currency Check -->
+        <form method="post" class="mt-4" action="@Url.Action("CheckCurrency")">
+            <div class="mb-3">
+                <label for="amount" class="form-label">Enter an amount to check currency (e.g., 1234.56):</label>
+                <input type="number" id="amount" name="amount" class="form-control" required step="0.01" />
+            </div>
+            <div class="mb-3">
+                <label for="country" class="form-label">Select a country:</label>
+                <select id="country" name="country" class="form-select">
+                    <option value="USA">USA</option>
+                    <option value="UK">UK</option>
+                    <option value="Japan">Japan</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Australia">Australia</option>
+                    <option value="Switzerland">Switzerland</option>
+                    <option value="Euro">Euro</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Check Currency</button>
+        </form>
+
+        @if (ViewBag.CurrencyExample != null)
+        {
+            <div class="alert alert-info mt-4">
+                <p>The currency format is: <strong>@ViewBag.CurrencyExample</strong></p>
             </div>
         }
     </div>
