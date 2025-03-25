@@ -1,0 +1,80 @@
+﻿@{
+    ViewData["Title"] = "Encryptie";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Encrypt" method="post">
+    <div>
+        <label for="inputText">Voer tekst in:</label>
+        <input type="text" id="inputText" name="inputText" />
+    </div>
+    <div>
+        <label for="key">Voer sleutel in (nummer):</label>
+        <input type="number" id="key" name="key" />
+    </div>
+    <div>
+        <button type="submit">Versleutel</button>
+    </div>
+</form>
+
+<form asp-action="Decrypt" method="post">
+    <div>
+        <label for="encryptedText">Voer versleutelde tekst in:</label>
+        <input type="text" id="encryptedText" name="encryptedText" />
+    </div>
+    <div>
+        <label for="keyDecrypt">Voer sleutel in (nummer):</label>
+        <input type="number" id="keyDecrypt" name="key" />
+    </div>
+    <div>
+        <button type="submit">Deversleutel</button>
+    </div>
+</form>
+
+@if (ViewBag.EncryptedText != null)
+{
+    <!-- Modal voor versleutelde tekst -->
+    <div class="modal fade" id="encryptedModal" tabindex="-1" role="dialog" aria-labelledby="encryptedModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="encryptedModalLabel">Versleutelde Tekst</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="encryptedTextToCopy">@ViewBag.EncryptedText</p>
+                    <button class="btn btn-primary" id="copyButton">Copy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#encryptedModal').modal('show');
+        });
+
+        document.getElementById("copyButton").addEventListener("click", function() {
+            var text = document.getElementById("encryptedTextToCopy").innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                alert("Tekst gekopieerd naar klembord!");
+            }).catch(function(err) {
+                console.error("Fout bij kopiëren: ", err);
+            });
+        });
+    </script>
+}
+
+@if (ViewBag.DecryptedText != null)
+{
+    <h3>Deversleutelde tekst:</h3>
+    <p>@ViewBag.DecryptedText</p>
+}
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <p style="color:red">@ViewBag.ErrorMessage</p>
+}
