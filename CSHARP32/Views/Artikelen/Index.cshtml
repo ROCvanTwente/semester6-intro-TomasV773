@@ -1,0 +1,52 @@
+﻿@model IEnumerable<CSHARP32.Models.Artikel>
+
+@{
+    ViewData["Title"] = "Voorraad Overzicht";
+}
+
+<h2>Voorraad Overzicht</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Titel</th>
+            <th>Prijs</th>
+            <th>Voorraad</th>
+            <th>Totale Waarde</th>
+            <th>Nieuwe Voorraad</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var artikel in Model)
+        {
+            <tr>
+                <td>
+                    @if (artikel is CSHARP32.Models.CD)
+                    {
+                        <span>CD</span>
+                    }
+                    else if (artikel is CSHARP32.Models.DVD)
+                    {
+                        <span>DVD</span>
+                    }
+                    else
+                    {
+                        <span>Onbekend</span>
+                    }
+                </td>
+                <td>@artikel.Titel</td>
+                <td>@artikel.Prijs.ToString("C")</td>
+                <td>@artikel.AantalStuks</td>
+                <td>@artikel.TotaleWaarde().ToString("C")</td>
+                <td>
+                    <form asp-action="WijzigVoorraad" method="post">
+                        <input type="hidden" name="id" value="@artikel.Id" />
+                        <input type="number" name="nieuwAantal" min="0" value="@artikel.AantalStuks" />
+                        <button type="submit" class="btn btn-primary">Bijwerken</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

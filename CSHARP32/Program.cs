@@ -1,3 +1,6 @@
+using CSHARP32.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace CSHARP32
 {
     public class Program
@@ -8,8 +11,10 @@ namespace CSHARP32
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+			builder.Services.AddDbContext<ApplicationDbContext>(options =>
+				options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            var app = builder.Build();
+			var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -28,7 +33,7 @@ namespace CSHARP32
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Artikelen}/{action=Index}/{id?}");
 
             app.Run();
         }
