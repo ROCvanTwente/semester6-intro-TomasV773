@@ -54,33 +54,33 @@ namespace CSHARP2
 		public void ChangeAge(int newAge) => Age = newAge;
 		public string GetInfo() => $"Kat: {Name}, Gewicht: {Weight} kg, Leeftijd: {Age} jaar";
 
-		public class AnimalController
+	}
+	public class AnimalController
+	{
+		private IAnimal _animal;
+		private AnimalView _view;
+
+		public AnimalController(IAnimal animal, AnimalView view)
 		{
-			private IAnimal _animal;
-			private AnimalView _view;
-
-			public AnimalController(IAnimal animal, AnimalView view)
-			{
-				_animal = animal;
-				_view = view;
-				_view.DisplayAnimalInfo(_animal.GetInfo());
-			}
-
-			public void UpdateAnimal(string name, double weight, int age)
-			{
-				_animal.ChangeName(name);
-				_animal.ChangeWeight(weight);
-				_animal.ChangeAge(age);
-				_view.DisplayAnimalInfo(_animal.GetInfo());
-			}
+			_animal = animal;
+			_view = view;
+			_view.DisplayAnimalInfo(_animal.GetInfo());
 		}
 
-		public class AnimalView
+		public void UpdateAnimal(string name, double weight, int age)
 		{
-			public void DisplayAnimalInfo(string info)
-			{
-				Console.WriteLine(info);
-			}
+			_animal.ChangeName(name);
+			_animal.ChangeWeight(weight);
+			_animal.ChangeAge(age);
+			_view.DisplayAnimalInfo(_animal.GetInfo());
+		}
+	}
+
+	public class AnimalView
+	{
+		public void DisplayAnimalInfo(string info)
+		{
+			Console.WriteLine(info);
 		}
 	}
 }

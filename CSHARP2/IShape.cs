@@ -56,31 +56,30 @@ namespace CSHARP2
 		{
 			Radius *= factor;
 		}
+	}
+	public class ShapeController
+	{
+		private IShape _shape;
+		private ShapeView _view;
 
-		public class ShapeController
+		public ShapeController(IShape shape, ShapeView view)
 		{
-			private IShape _shape;
-			private ShapeView _view;
-
-			public ShapeController(IShape shape, ShapeView view)
-			{
-				_shape = shape;
-				_view = view;
-				_view.DisplayShapeInfo(_shape.Area, _shape.CalculatePerimeter());
-			}
-
-			public void ResizeShape(double factor)
-			{
-				_shape.Resize(factor);
-				_view.DisplayShapeInfo(_shape.Area, _shape.CalculatePerimeter());
-			}
+			_shape = shape;
+			_view = view;
+			_view.DisplayShapeInfo(_shape.Area, _shape.CalculatePerimeter());
 		}
-		public class ShapeView
+
+		public void ResizeShape(double factor)
 		{
-			public void DisplayShapeInfo(double area, double perimeter)
-			{
-				Console.WriteLine($"Oppervlakte: {area}, Omtrek: {perimeter}");
-			}
+			_shape.Resize(factor);
+			_view.DisplayShapeInfo(_shape.Area, _shape.CalculatePerimeter());
+		}
+	}
+	public class ShapeView
+	{
+		public void DisplayShapeInfo(double area, double perimeter)
+		{
+			Console.WriteLine($"Oppervlakte: {area}, Omtrek: {perimeter}");
 		}
 	}
 }
