@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35913.81 d17.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRDbDependency", "SignalRDbDependency.csproj", "{CBF3CD24-04FD-4F31-87C2-E3E385C058D9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRDbDependency", "SignalRDbDependency.csproj", "{F4D9DF03-166B-4708-A127-7D87B5860589}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CBF3CD24-04FD-4F31-87C2-E3E385C058D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CBF3CD24-04FD-4F31-87C2-E3E385C058D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CBF3CD24-04FD-4F31-87C2-E3E385C058D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CBF3CD24-04FD-4F31-87C2-E3E385C058D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4D9DF03-166B-4708-A127-7D87B5860589}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4D9DF03-166B-4708-A127-7D87B5860589}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4D9DF03-166B-4708-A127-7D87B5860589}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4D9DF03-166B-4708-A127-7D87B5860589}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {6C76D9A3-3497-4A7D-9131-831FA0338E39}
+		SolutionGuid = {344F1486-B8E6-4438-8089-C917E91C8DC3}
 	EndGlobalSection
 EndGlobal
