@@ -1,0 +1,65 @@
+﻿@model ASPSEC3.Models.HashViewModel
+
+@{
+    ViewData["Title"] = "Hash Generator";
+}
+
+<div class="container mt-5">
+    <h2>Hash Generator</h2>
+    <form method="post" asp-action="HashText" asp-controller="Hash">
+        <div class="form-group">
+            <label for="inputText">Text to Hash:</label>
+            <input type="text" class="form-control" id="inputText" name="InputText" required />
+        </div>
+
+        <div class="form-group">
+            <label>Select Hash Algorithm:</label><br />
+            <input type="radio" id="MD5" name="SelectedAlgorithm" value="MD5" /> MD5<br />
+            <input type="radio" id="SHA1" name="SelectedAlgorithm" value="SHA-1" /> SHA-1<br />
+            <input type="radio" id="SHA256" name="SelectedAlgorithm" value="SHA-256" /> SHA-256<br />
+            <input type="radio" id="SHA512" name="SelectedAlgorithm" value="SHA-512" /> SHA-512<br />
+            <input type="radio" id="BCrypt" name="SelectedAlgorithm" value="BCrypt" /> BCrypt<br />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Generate Hash</button>
+    </form>
+
+    <button type="button" class="btn btn-success mt-3" data-toggle="modal" data-target="#hashModal" id="showHashResultBtn" style="display:none;">
+        Show Hashed Value
+    </button>
+
+    <div class="modal fade" id="hashModal" tabindex="-1" role="dialog" aria-labelledby="hashModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="hashModalLabel">Hashed Value</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="hashedValueContent">
+                    <p id="hashedValueText">@Model.HashedValue</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var hashedValue = '@Model.HashedValue';
+            if (hashedValue) {
+                $('#hashedValueText').text(hashedValue);
+
+                $('#showHashResultBtn').click();
+            }
+        });
+    </script>
+}

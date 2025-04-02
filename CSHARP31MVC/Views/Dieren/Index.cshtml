@@ -1,0 +1,27 @@
+﻿@model List<CSHARP31.Dier>
+
+@{
+    ViewData["Title"] = "Dieren geluiden";
+}
+
+<h2>Dieren geluiden</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Type Dier</th>
+            <th>Gewicht (kg)</th>
+            <th>Geluid</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var dier in Model)
+        {
+            <tr>
+                <td>@dier.GetType().Name</td>
+                <td>@dier.Gewicht</td>
+                <td>@dier.Geluid()</td>
+            </tr>
+        }
+    </tbody>
+</table>

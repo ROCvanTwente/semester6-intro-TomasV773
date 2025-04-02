@@ -1,0 +1,106 @@
+﻿@{
+    ViewData["Title"] = "Encryptie";
+}
+
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h2>@ViewData["Title"]</h2>
+
+        <!-- Formulier voor versleutelen -->
+        <form asp-action="Encrypt" method="post" class="mt-4">
+            <div class="form-group">
+                <label for="inputText">Voer tekst in:</label>
+                <input type="text" id="inputText" name="inputText" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="key">Voer sleutel in (nummer):</label>
+                <input type="number" id="key" name="key" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Versleutel</button>
+            </div>
+        </form>
+
+        <!-- Formulier voor deversleutelen -->
+        <form asp-action="Decrypt" method="post" class="mt-4">
+            <div class="form-group">
+                <label for="encryptedText">Voer versleutelde tekst in:</label>
+                <input type="text" id="encryptedText" name="encryptedText" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="keyDecrypt">Voer sleutel in (nummer):</label>
+                <input type="number" id="keyDecrypt" name="key" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-secondary">Deversleutel</button>
+            </div>
+        </form>
+
+        <!-- Foutmelding -->
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div class="alert alert-danger mt-4">@ViewBag.ErrorMessage</div>
+        }
+
+        <!-- Versleutelde tekst Modal -->
+        @if (ViewBag.EncryptedText != null)
+        {
+            <div class="modal fade" id="encryptedModal" tabindex="-1" role="dialog" aria-labelledby="encryptedModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="encryptedModalLabel">Versleutelde Tekst</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p id="encryptedTextToCopy">@ViewBag.EncryptedText</p>
+                            <button class="btn btn-success" id="copyButton">Copy</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- Deversleutelde tekst -->
+        @if (ViewBag.DecryptedText != null)
+        {
+            <h3 class="mt-4">Deversleutelde tekst:</h3>
+            <p>@ViewBag.DecryptedText</p>
+        }
+    </div>
+
+    <!-- Bootstrap en Custom JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script> 
+    <script>
+        $(document).ready(function() {
+            if ('@ViewBag.EncryptedText' != '') {
+                $('#encryptedModal').modal('show');
+            }
+        });
+
+        document.getElementById("copyButton").addEventListener("click", function() {
+            var text = document.getElementById("encryptedTextToCopy").innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                alert("Tekst gekopieerd naar klembord!");
+            }).catch(function(err) {
+                console.error("Fout bij kopiëren: ", err);
+            });
+        });
+    </script>
+
+</body>
+</html>
